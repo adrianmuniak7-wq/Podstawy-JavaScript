@@ -6,10 +6,8 @@ const tripCosts = [
     { label: "pamiątki", amount: 100, paidBy: "Piotr", category: "luxury" }
 ];
 
-// 1. Obliczanie całkowitego kosztu wyjazdu
 const totalTripCost = tripCosts.reduce((sum, item) => sum + item.amount, 0);
 
-// 2. Budowanie struktury wydatków na osobę (agregacja do obiektu)
 const costsPerPerson = tripCosts.reduce((acc, item) => {
     const person = item.paidBy;
     if (!acc[person]) {
@@ -19,7 +17,6 @@ const costsPerPerson = tripCosts.reduce((acc, item) => {
     return acc;
 }, {});
 
-// 3. Wskazanie osoby, która zapłaciła najwięcej
 let topPayer = "";
 let maxAmount = 0;
 
@@ -30,14 +27,11 @@ for (const person in costsPerPerson) {
     }
 }
 
-// 5. Rozszerzenie: Obliczanie bilansu dla równego podziału
 const participants = Object.keys(costsPerPerson);
 const sharePerPerson = totalTripCost / participants.length;
 
-// Funkcja pomocnicza do formatowania (Rozszerzenie własne)
 const formatMoney = (val) => `${val.toFixed(2)} PLN`;
 
-// 4. Generowanie raportu końcowego
 console.log("RAPORT ROZLICZENIOWY WYJAZDU");
 console.log("----------------------------");
 console.log(`Całkowity koszt: ${formatMoney(totalTripCost)}`);
